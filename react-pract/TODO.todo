@@ -1,0 +1,39 @@
+Shortcuts:
+  - 'Cmd/Ctrl+Enter' // Triggers `Todo: Toggle Box`
+  - 'Alt+Enter' // Triggers `Todo: Toggle Box`
+  - 'Alt+D' // Triggers `Todo: Toggle Done`
+  - 'Alt+C' // Triggers `Todo: Toggle Cancelled`
+  - 'Alt+S' // Triggers `Todo: Toggle Start`
+  - 'Cmd/Ctrl+Shift+A' // Triggers  `Todo: Archive`
+
+Practicum ToDo's:
+  ☐ Logs: Get project working like the previous logs practicum
+  ☐ Replacement: Replace any JS/JQL with React
+  ☐ Components: Muse use at least two React Components
+  ☐ New Reqs: add new requirements to the project
+
+Logs: 
+  ☐ set up the server
+  ☐ make sure mongo is connected
+  ☐ test the CRUDL stuff with mongo
+  ☐ 
+
+Replacement: 
+  ☐ JS replaced
+  ☐ JQL replaces
+
+Components: 
+  ☐ 
+
+New Reqs: 
+  ☐ Login/Sinup: Add a login/signup page
+  ☐ Add an admin page for adding new courses
+  ☐ Add a student page for adding themselves to a course
+  ☐ Use client side routing for navigating between pages
+  ☐ Use a state store
+  ☐ Design: Make sure the site and pages are looking good
+
+Login/Sinup: 
+  ☐ Admin and student are the roles
+  ☐ Admin can see all coures and student logs
+  ☐ Students can only see their own logs
