@@ -13,6 +13,7 @@ Practicum ToDo's:
   ☐ New Reqs: add new requirements to the project
 
 Logs: 
+  ✔ connect server and react together @done(23-11-27 17:24)
   ☐ set up the server
   ☐ make sure mongo is connected
   ☐ test the CRUDL stuff with mongo
