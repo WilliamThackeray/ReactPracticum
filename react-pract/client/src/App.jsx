@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react'
 
 function App() {
   // Initialized default state
-  const [serverResponse, setServerResponse] = useState('booger')
+  const [serverResponse, setServerResponse] = useState('')
 
   // useEffect() is called when the component loads onto the page. This is where we will do default setup type stuff
   useEffect(() => {
