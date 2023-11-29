@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -9,6 +11,25 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var testServerRouter = require('./routes/testServer')
 var coursesRouter = require('./routes/courses')
+
+// ----- DB ------
+var Mon = require('mongodb').MongoClient;
+var url = process.env.URL
+let connection
+let db
+async function dbConnect() {
+  try {
+    connection = await Mon.connect(url)
+  } catch(err) {
+    throw err
+  }
+}
+dbConnect().then(() => {
+  db = connection.db('uvu')
+})
+
+
+// ----- SERVER ------
 
 var app = express();
 
