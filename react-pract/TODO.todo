@@ -38,3 +38,14 @@ Login/Sinup:
   ☐ Admin and student are the roles
   ☐ Admin can see all coures and student logs
   ☐ Students can only see their own logs
+
+Admin Page: 
+  ☐ see all courses
+  ☐ see all student logs
+  ☐ add a new course
+
+Student Page:
+  ☐ can only see their own logs
+  ☐ can only the classes their in
+  ☐ add themselves to a course 
+  ☐ add logs
