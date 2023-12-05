@@ -5,17 +5,16 @@ import React, { useState, useEffect } from 'react'
 
 function App() {
   // Initialized default state
-  // const [serverResponse, setServerResponse] = useState('')
   const [courseDropdown, setCourseDropdown] = useState([])
 
   // useEffect() is called when the component loads onto the page. This is where we will do default setup type stuff
   useEffect(() => {
     // When the component loads, call the 'callServer()' function to set the state and test server response
-    callServer()
+    populateDropdown()
   }, [])
 
   // This will fetch data from the server
-  function callServer() {
+  function populateDropdown() {
     fetch('http://localhost:9000/courses') // you can test manually when running the server on your local machine by going to this url
       .then(res => res.json())
       .then(data => {
@@ -32,15 +31,12 @@ function App() {
         <div className="bg-white dark:bg-silver">
           <img src={logo} width="250" height="auto" alt='uvu logo' />
         </div>
-        <div>
-          {/* Server response: {courseDropdown} */}
-        </div>
         <form className="flex flex-col">
           <div id="topDiv" className="px-12 py-2 text-white bg-primary-500">
             <label for="course">Select Course</label><br />
             <select aria-label="Select Course" id="course" name="course" data-cy="course_select" className="rounded text-black px-2 py-1">
               <option selected value="">Choose Courses</option>
-              {courseDropdown.map(course => <option>{course.display}</option>)}
+              {courseDropdown.map(course => <option key={course.id}>{course.display}</option>)}
             </select><br />
 
             <div id="uvuIdDiv" className="py-2 hidden">
