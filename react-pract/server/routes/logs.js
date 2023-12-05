@@ -36,4 +36,18 @@ router.get('/', async function(req, res) {
   }
 })
 
+app.post('/', async (req, res) => {
+  try {
+    connection = await Mon.connect(url)
+    let db = connection.db('uvu')
+    let newLog = req.body
+    await db.collection(req.body.courseId).insertOne(newLog)
+    res.status(201)
+    res.send(newLog)
+    // connection.close()
+  } catch(err) {
+    throw err
+  }
+})
+
 module.exports = router
