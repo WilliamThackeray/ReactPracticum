@@ -1,11 +1,14 @@
 import logo from './UVUMonogramGreen-0005.png'
 import './App.css';
-import Header from './Components/Header';
+// import Header from './Components/Header';
 import React, { useState, useEffect } from 'react'
 
 function App() {
   // Initialized default state
   const [courseDropdown, setCourseDropdown] = useState([])
+  const [dropDownVal, setDropDownVal] =useState([])
+  const [studentLogs, setStudentLogs] = useState([])
+  const [studentNumber, setStudentNumber] = useState('')
 
   // useEffect() is called when the component loads onto the page. This is where we will do default setup type stuff
   useEffect(() => {
@@ -23,6 +26,25 @@ function App() {
       })
   }
 
+  function numUpdate() { // used to update the student number state to query the DB
+    setStudentNumber(document.querySelector('input').value)
+  }
+  function dropdownUpdate() {
+    console.log('dropdownUpdate')
+    let val = document.querySelector('#course').value
+    setDropDownVal(val)
+    console.log(dropDownVal)
+  }
+
+  function getLogs() {
+    // fetch url should look like:
+      // logs?courseId={cs3380}&uvuId={10333333}
+    
+  }
+
+
+
+
 
 
   return (
@@ -34,7 +56,7 @@ function App() {
         <form className="flex flex-col">
           <div id="topDiv" className="px-12 py-2 text-white bg-primary-500">
             <label for="course">Select Course</label><br />
-            <select aria-label="Select Course" id="course" name="course" data-cy="course_select" className="rounded text-black px-2 py-1">
+            <select aria-label="Select Course" id="course" name="course" data-cy="course_select" className="rounded text-black px-2 py-1" onChange={dropdownUpdate}>
               <option selected value="">Choose Courses</option>
               {courseDropdown.map(course => <option key={course.id}>{course.display}</option>)}
             </select><br />
@@ -42,7 +64,7 @@ function App() {
             <div id="uvuIdDiv" className="py-2 hidden">
               <label for="uvuId">UVU ID</label><br />
 
-              <input type="text" placeholder="10234567" id="uvuId" name="uvuId" data-cy="uvuId_input" maxlength="8" className="text-black rounded px-1" />
+              <input type="text" placeholder="10234567" onChange={numUpdate} id="uvuId" name="uvuId" data-cy="uvuId_input" maxlength="8" className="text-black rounded px-1" />
               <div id="errorsDiv"></div>
             </div>
           </div>

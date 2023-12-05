@@ -11,6 +11,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var testServerRouter = require('./routes/testServer')
 var coursesRouter = require('./routes/courses')
+var logsRouter = require('./routes/logs')
 
 // ----- DB ------
 var Mon = require('mongodb').MongoClient;
@@ -48,6 +49,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/testServer', testServerRouter)
 app.use('/courses', coursesRouter)
+app.use('/logs', logsRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
