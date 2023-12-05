@@ -6,13 +6,21 @@ import React, { useState, useEffect } from 'react'
 function App() {
   // Initialized default state
   const [courseDropdown, setCourseDropdown] = useState([])
-  const [dropDownVal, setDropDownVal] =useState([])
+  const [courseId, setCourseId] =useState([])
   const [studentLogs, setStudentLogs] = useState([])
-  const [studentNumber, setStudentNumber] = useState('')
+  const [uvuId, setUvuId] = useState('')
 
   // useEffect() is called when the component loads onto the page. This is where we will do default setup type stuff
   useEffect(() => {
     // When the component loads, call the 'callServer()' function to set the state and test server response
+
+    document.querySelector('#uvuId').addEventListener('keyup', () => {
+      let idInput = document.querySelector('#uvuId');
+      if (idInput.value.length === 8) {
+        getLogs()
+      }
+    })
+
     populateDropdown()
   }, [])
 
@@ -27,19 +35,43 @@ function App() {
   }
 
   function numUpdate() { // used to update the student number state to query the DB
-    setStudentNumber(document.querySelector('input').value)
+    setUvuId(document.querySelector('input').value)
   }
   function dropdownUpdate() {
     console.log('dropdownUpdate')
     let val = document.querySelector('#course').value
-    setDropDownVal(val)
-    console.log(dropDownVal)
+    console.log('val: ',val)
+    switch(val){
+      case 'CS 3380':
+        console.log('cs 3380')
+        setCourseId('cs3380')
+        break;
+      case 'CS 4660':
+        setCourseId('cs4660')
+        break;
+      case 'CS 4690':
+        setCourseId('cs4690')
+        break;
+      default:
+        console.log('default')
+        setCourseId('')
+    }
+
   }
 
   function getLogs() {
-    // fetch url should look like:
-      // logs?courseId={cs3380}&uvuId={10333333}
-    
+    // got this working... mostly...
+    // something were being a little weird with not getting anything from the query and then after an error in the code the query gets stuff back.  -William
+
+    console.log('courseDropdown: ', courseDropdown)
+    console.log('courseId: ', courseId)
+    console.log('uvuId: ', uvuId)
+
+    fetch(`http://localhost:9000/logs?courseid=${courseId}&uvuid=${uvuId}`)
+      .then(res => res.json())
+      .then(data => {
+        setStudentLogs(data)
+      })
   }
 
 
@@ -58,7 +90,7 @@ function App() {
             <label for="course">Select Course</label><br />
             <select aria-label="Select Course" id="course" name="course" data-cy="course_select" className="rounded text-black px-2 py-1" onChange={dropdownUpdate}>
               <option selected value="">Choose Courses</option>
-              {courseDropdown.map(course => <option key={course.id}>{course.display}</option>)}
+              {courseDropdown.map(course => <option key={course.id} queryData={course.id}>{course.display}</option>)}
             </select><br />
 
             <div id="uvuIdDiv" className="py-2 hidden">
@@ -74,6 +106,8 @@ function App() {
               No Logs Selected. Logs will show below.
             </h3>
             <ul data-cy="logs" id="logs"></ul>
+            {/*    this is not working yet     */}
+              {studentLogs.map(log => <li>{log.text}</li>)}
             <br />
             <label className="text-xl py-2">New Log</label><br />
             <textarea id="txtArea" aria-label="add log textarea"
