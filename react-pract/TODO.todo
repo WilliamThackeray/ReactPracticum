@@ -17,7 +17,7 @@ Logs:
   ☐ set up the server
   ✔ make sure mongo connected @done(23-11-29 16:01)
   ☐ test the CRUDL stuff with mongo
-  ☐ Populate the courses dropdown
+  ✔ Populate the courses dropdown
 
 Replacement: 
   ☐ JS replaced
