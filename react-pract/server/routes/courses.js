@@ -27,7 +27,7 @@ router.get('/', async function(req, res, next) {
       return res
     })
     res.send(courses) // send the course list
-    connection.close()
+    // connection.close()
   } catch(err) {
     throw err
   }
