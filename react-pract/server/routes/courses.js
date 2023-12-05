@@ -18,7 +18,6 @@ let connection
 // })
 
 router.get('/', async function(req, res, next) {
-  console.log('Courses Route')
   try {
     connection = await Mon.connect(url)
     let db = connection.db('uvu')

@@ -17,19 +17,24 @@ let connection
 //   db = connection.db('uvu')
 // })
 
-router.get('/', async function(req, res, next) {
+router.get('/', async function(req, res) {
   console.log('Logs Route')
   try {
     connection = await Mon.connect(url)
     let db = connection.db('uvu')
-
+    
     let cid = req.query.courseId
     let stuid = req.query.uvuId
+    console.log('hello1')
     let logs = await db.collection(`${cid}`).find({'uvuId':stuid}).toArray(function (err, res) {
       if (err) throw err
+      console.log('hello2')
       return res
     })
     res.send(logs) // send the course list
+    console.log(req.query.cou)
+    console.log(req.query)
+    console.log(logs)
     // connection.close()
   } catch(err) {
     throw err
