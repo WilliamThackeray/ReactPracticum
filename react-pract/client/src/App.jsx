@@ -9,9 +9,9 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />} >
-          <Route index element={<AdminLogs />}/>
+          <Route index element={<SignIn />}/>
           <Route path="student" element={<StudentLogs />}/>
-          <Route path="signin" element={<SignIn />}/>
+          <Route path="admin" element={<AdminLogs />}/>
           {/* <Route path="teams" element={<TeamsPage/>} />
           <Route path="add-team" element={<AddEditTeam/>}/>
           <Route path="edit-team/:id" element={<AddEditTeam/>}/> */}
