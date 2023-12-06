@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { Outlet } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import '../App.css'
 
-function AdminLogs() {
+function StudentLogs({uvuId}) {
   // Initialized default state
   const [courseDropdown, setCourseDropdown] = useState([])
-  const [courseId, setCourseId] =useState([])
+  const [courseId, setCourseId] =useState('')
   const [studentLogs, setStudentLogs] = useState([])
-  const [uvuId, setUvuId] = useState('')
+  navigate = useNavigate()
 
   // useEffect() is called when the component loads onto the page. This is where we will do default setup type stuff
   useEffect(() => {
@@ -17,7 +17,7 @@ function AdminLogs() {
 
   // This will fetch data from the server
   function populateDropdown() {
-    fetch(`http://localhost:9000/api/v1/courses?uvuId=10333333`) //TODO change to uvuId
+    fetch(`http://localhost:9000/api/v1/courses?uvuId=${uvuId}`) //TODO change to uvuId
       .then(res => res.json())
       .then(data => {
         setCourseDropdown(data)
@@ -47,11 +47,11 @@ function AdminLogs() {
     // }
   }
 
-  function getLogs(courseNum) { 
+  function getLogs(courseId) { 
     document.querySelector('#uvuIdDisplay').style.display = 'none'
     let noLogs = document.querySelector('#noLogs')
     noLogs.innerText = ''
-    fetch(`http://localhost:9000/api/v1/logs?courseId=${courseNum}&uvuId=10333333`)//TODO uvuId should be used here and should already be set
+    fetch(`http://localhost:9000/api/v1/logs?courseId=${courseId}&uvuId=${uvuId}`)//TODO uvuId should be used here and should already be set
       .then(res => res.json())
       .then(data => {
         setStudentLogs(data)
@@ -90,7 +90,7 @@ function AdminLogs() {
         sec
       const newLog = {
         courseId: courseId,
-        uvuId: document.querySelector('#uvuId').value,
+        uvuId: uvuId,
         date: time,
         text: document.querySelector('#txtArea').value.trim()
       }
@@ -102,22 +102,33 @@ function AdminLogs() {
         },
         body: JSON.stringify(newLog)
       })
-      getLogs(uvuId)
+      getLogs(courseId)
     }
   }
 
+  function handleAddCourse(event) {
+    event.preventDefault()
+    navigate('/student/addToCourse')
+  }
 
+  function handleTextBoxChange(event) {
+    if (event.target.value) document.querySelector('#submitBtn').disabled = false
+    else document.querySelector('#submitBtn').disabled = true
+  }
 
   return (
     <div className="App">
       <div className="">
         <form onSubmit={addLog} method='post'>
           <div id="topDiv">
-            <label for="course">Select Course</label><br />
-            <select aria-label="Select Course" id="course" name="course" data-cy="course_select" onChange={dropdownUpdate}>
-              <option value="Choose Courses">Choose Courses</option>
-              {courseDropdown.map(course => <option key={course.id}>{course.display}</option>)}
-            </select><br />
+            <button onClick={handleAddCourse}>Add Course</button>
+            <div>
+              <label for="course">Select Course</label><br />
+              <select aria-label="Select Course" id="course" name="course" data-cy="course_select" onChange={dropdownUpdate}>
+                <option value="Choose Courses">Choose Courses</option>
+                {courseDropdown.map(course => <option key={course.id}>{course.display}</option>)}
+              </select><br />
+            </div>
 
             <div id="uvuIdDiv" className="py-2 hidden">
               <label for="uvuId">UVU ID {uvuId}</label><br />
@@ -132,7 +143,7 @@ function AdminLogs() {
               {studentLogs.map(log => <li>{log.text}</li>)}
             <br />
             <label>New Log</label><br />
-            <textarea id="txtArea" aria-label="add log textarea"
+            <textarea id="txtArea" onChange={handleTextBoxChange} aria-label="add log textarea"
               data-cy="log_textarea"></textarea><br />
             <button id="submitBtn" type="submit" data-cy="add_log_btn" disabled>
               Add Log
@@ -144,4 +155,4 @@ function AdminLogs() {
   )
 }
 
-export default AdminLogs;
+export default StudentLogs;

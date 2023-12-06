@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import '../App.css'
 import { useNavigate } from 'react-router-dom'
 
-export default function SignIn() {
+export default function SignIn({handleUvuId}) {
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -62,7 +62,10 @@ export default function SignIn() {
     
     // check database for matching values
     if (person){
-      if (person.number === stuNum) doNumbersmatch = true
+      if (person.number === stuNum) {
+        doNumbersmatch = true
+        handleUvuId(stuNum)
+      }
       if (person.pword === pword) doPwordsmatch = true
     }
 
@@ -183,7 +186,7 @@ export default function SignIn() {
             <label for="stuNum">Student Number:<input type='number' name='stuNum' id='stuNumNew' onKeyDown={preventMoreText}></input></label>
             <label for="password">Password:<input type='password' name='password' id='passwordNew' pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"></input></label>
             <label for="cpassword">Confirm Password:<input type='password' name='cpassword' id='cpassword' pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"></input></label>
-            <button type='button' onClick={handleSignUpSubmit}>Sign In</button>
+            <button type='button' onClick={handleSignUpSubmit}>Sign Up</button>
 
           </form>
         </div>

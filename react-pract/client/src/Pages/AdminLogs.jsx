@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import '../App.css'
 
-function AdminLogs() {
+function AdminLogs({uvuId}) {
   // Initialized default state
   const [courseDropdown, setCourseDropdown] = useState([])
   const [courseId, setCourseId] =useState([])
   const [studentLogs, setStudentLogs] = useState([])
-  const [uvuId, setUvuId] = useState('')
 
   // useEffect() is called when the component loads onto the page. This is where we will do default setup type stuff
   useEffect(() => {
