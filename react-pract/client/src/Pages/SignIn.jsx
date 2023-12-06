@@ -1,6 +1,6 @@
 import logo from '../UVUMonogramGreen-0005.png'
 import React, { useState, useEffect } from 'react'
-import styles from '../App.css'
+import '../App.css'
 
 export default function SignIn() {
   useEffect(() => {
@@ -53,12 +53,35 @@ export default function SignIn() {
     // check all input values to make sure they are valid
     let isNumValid = validateStudentNumber(stuNum)
     console.log('isNumValid? ', isNumValid)
+    
     // check database for matching values
 
     // check for type of user (student | admin)
 
     // send the user to the correct page
   }
+  function handleSignUpSubmit() {
+    // get student number, password, and cpassword values
+    let stuNum = document.querySelector('#stuNumNew').value
+    let pword = document.querySelector('#passwordNew').value
+    let cpword = document.querySelector('#cpassword').value
+
+    // validate student number
+    let isNumValid = validateStudentNumber(stuNum)
+
+    // validate password && cpassword
+    let isPwordValid = validatePassword(pword)
+    let isCpwordValid = validatePassword(cpword)
+
+    // validate that password and cpassword match
+    let doPasswordsMatch = pword === cpword ? true : false
+
+    // add a person to the DB
+    if (isNumValid && isPwordValid && isCpwordValid && doPasswordsMatch) {
+      // add the person to the DB
+    }
+  }
+
   function validateStudentNumber(num) {
     console.log('validateStudentNumber()')
     let regex = /[a-zA-Z]/
@@ -71,10 +94,16 @@ export default function SignIn() {
   }
   function validatePassword(pword) {
     console.log('validatePassword()')
-    let regex = /"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"/
+    let upperCase = /[A-Z]/g
+    let lowerCase = /[a-z]/g
+    let numbers = /[0-9]/g
 
     // validate password length, letter, and number
-
+    if (!pword.match(upperCase)) return false
+    if (!pword.match(lowerCase)) return false
+    if (!pword.match(numbers)) return false
+    if (!(pword.length >= 8)) return false
+    return true
   }
   function validateExisitingPassword(pword) {
     console.log('validateExisitingPassword()')
@@ -104,9 +133,10 @@ export default function SignIn() {
           <form>
             <label for="fname">First Name:<input type='text' name='fname' id='fname'></input></label>
             <label for="lname">Last Name:<input type='text' name='lname' id='lname'></input></label>
-            <label for="stuNum">Student Number:<input type='number' name='stuNum' id='stuNum'></input></label>
-            <label for="password">Password:<input type='password' name='password' id='password'></input></label>
-            <label for="cpassword">Confirm Password:<input type='password' name='cpassword' id='cpassword'></input></label>
+            <label for="stuNum">Student Number:<input type='number' name='stuNum' id='stuNumNew' onKeyDown={preventMoreText}></input></label>
+            <label for="password">Password:<input type='password' name='password' id='passwordNew' pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"></input></label>
+            <label for="cpassword">Confirm Password:<input type='password' name='cpassword' id='cpassword' pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"></input></label>
+            <button type='button' onClick={handleSignUpSubmit}>Sign In</button>
 
           </form>
         </div>
