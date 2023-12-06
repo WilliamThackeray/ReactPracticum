@@ -1,38 +1,43 @@
-.App {
-  text-align: center;
-}
+/* CSS for the site */
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+/* Sign In Page */
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.signInBody {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+.buttons {
+  display: flex;
+  flex-direction: row;
+}
+.buttons button {
+  padding: 0.6rem 1rem;
+  margin: 1rem;
+}
+.active {
+  background-color: #275d38;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.signInDiv {
+
+}
+.signInDiv h1 {
+  text-align: center;
+}
+.signInDiv form {
+  display: flex;
+  flex-direction: column;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.signUpDiv {
+  
+}
+.signUpDiv h1 {
+  text-align: center;
+}
+.signUpDiv form {
+  display: flex;
+  flex-direction: column;
 }
