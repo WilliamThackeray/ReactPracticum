@@ -6,7 +6,6 @@ function Layout(props) {
     <>
       <Logo />
       <Outlet />
-      {/* <Footer /> */}
     </>
   );
 }
