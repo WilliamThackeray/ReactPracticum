@@ -1,5 +1,6 @@
 import logo from '../UVUMonogramGreen-0005.png'
 import React, { useState, useEffect } from 'react'
+import '../App.css'
 
 function AdminLogs() {
   // Initialized default state

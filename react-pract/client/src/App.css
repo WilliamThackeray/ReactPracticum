@@ -1,5 +1,19 @@
 /* CSS for the site */
 
+:root {
+  -uvu-green-primary: #275d38;
+  -uvu-green-l3: #6f937a;
+  -uvu-green-l2: #578164;
+  -uvu-green-l1: #3f6f4e;
+  -uvu-green-d1: #235332;
+  -uvu-green-d2: #1e482c;
+
+  -silver: #8e8c89;
+  -black: #1f1f1f;
+  -grey: #e8e8e8;
+  -grey-light: #f9f9f9;
+}
+
 /* Sign In Page */
 
 .signInBody {
@@ -40,4 +54,16 @@
 .signUpDiv form {
   display: flex;
   flex-direction: column;
+}
+
+/* Admin Page */
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.topDiv {
+
 }
