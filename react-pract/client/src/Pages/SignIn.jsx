@@ -36,13 +36,42 @@ export default function SignIn() {
     document.querySelector('.signInDiv').style.display = 'none'
     document.querySelector('.signUpDiv').style.display = 'block'
   }
-  
+
   function preventMoreText(event) { //used to stop more text
     if (event.key === 'Backspace') return
     else if (event.target.value.length === 8) {
       event.preventDefault()
       event.stopPropagation()
     }
+  }
+
+  function handleLoginSubmit() {
+    // get all the input values
+    let stuNum = document.querySelector('#stuNum').value
+    let pword = document.querySelector('#password').value
+
+    // check all input values to make sure they are valid
+    let isNumValid = validateStudentNumber(stuNum)
+    console.log('isNumValid? ', isNumValid)
+    // check database for matching values
+
+    // check for type of user (student | admin)
+
+    // send the user to the correct page
+  }
+  function validateStudentNumber(num) {
+    console.log('validateStudentNumber()')
+    let regex = /[a-zA-Z]/
+
+    // check length === 8 chars
+    if (num.length !== 8) return false
+    // check it's only numbers
+    if (regex.exec(num)) return false
+    return true
+  }
+  function validatePassword(pword) {
+    console.log('validatePassword()')
+
   }
 
 
@@ -59,6 +88,7 @@ export default function SignIn() {
           <form>
             <label for="stuNum">Student Number:<input type='number' name='stuNum' id='stuNum' onKeyDown={preventMoreText}></input></label>
             <label for="password">Password:<input type='password' name='password' id='password'></input></label>
+            <button type='button' onClick={handleLoginSubmit}>Sign In</button>
           </form>
         </div>
         <div className='signUpDiv hide'>
