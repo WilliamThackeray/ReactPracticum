@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import '../App.css'
 
 function StudentLogs({uvuId}) {
@@ -7,7 +7,7 @@ function StudentLogs({uvuId}) {
   const [courseDropdown, setCourseDropdown] = useState([])
   const [courseId, setCourseId] =useState('')
   const [studentLogs, setStudentLogs] = useState([])
-  navigate = useNavigate()
+  const navigate = useNavigate()
 
   // useEffect() is called when the component loads onto the page. This is where we will do default setup type stuff
   useEffect(() => {
@@ -106,10 +106,6 @@ function StudentLogs({uvuId}) {
     }
   }
 
-  function handleAddCourse(event) {
-    event.preventDefault()
-    navigate('/student/addToCourse')
-  }
 
   function handleTextBoxChange(event) {
     if (event.target.value) document.querySelector('#submitBtn').disabled = false
@@ -121,7 +117,7 @@ function StudentLogs({uvuId}) {
       <div className="">
         <form onSubmit={addLog} method='post'>
           <div id="topDiv">
-            <button onClick={handleAddCourse}>Add Course</button>
+            <Link to='/student/addToCourse' state={uvuId}><button>Add Course</button></Link>
             <div>
               <label for="course">Select Course</label><br />
               <select aria-label="Select Course" id="course" name="course" data-cy="course_select" onChange={dropdownUpdate}>

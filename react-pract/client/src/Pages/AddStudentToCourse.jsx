@@ -11,7 +11,7 @@ function AddStudentToCourse({uvuId}) {
   }, [])
 
   const nav = useNavigate()
-
+  console.log(uvuId)
   function populateDropdown() {
     fetch('http://localhost:9000/api/v1/courses') // you can test manually when running the server on your local machine by going to this url
       .then(res => res.json())

@@ -64,7 +64,6 @@ function AdminLogs({uvuId}) {
   }
 
   function getLogs(studentId) { //called on key up 
-    setUvuId(studentId)
     document.querySelector('#uvuIdDisplay').style.display = 'none'
     let noLogs = document.querySelector('#noLogs')
     noLogs.innerText = ''
