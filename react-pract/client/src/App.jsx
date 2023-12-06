@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import StudentLogs from "./Pages/StudentLogs.jsx";
 import AdminLogs from "./Pages/AdminLogs.jsx";
 import Layout from "./Pages/Layout.jsx";
+import SignIn from "./Pages/SignIn.jsx";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
         <Route path="/" element={<Layout />} >
           <Route index element={<AdminLogs />}/>
           <Route path="student" element={<StudentLogs />}/>
+          <Route path="signin" element={<SignIn />}/>
           {/* <Route path="teams" element={<TeamsPage/>} />
           <Route path="add-team" element={<AddEditTeam/>}/>
           <Route path="edit-team/:id" element={<AddEditTeam/>}/> */}
