@@ -71,7 +71,15 @@ export default function SignIn() {
   }
   function validatePassword(pword) {
     console.log('validatePassword()')
+    let regex = /"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"/
 
+    // validate password length, letter, and number
+
+  }
+  function validateExisitingPassword(pword) {
+    console.log('validateExisitingPassword()')
+
+    // check if the password is in the DB
   }
 
 
