@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import '../App.css'
+import { useNavigate } from 'react-router-dom'
 
 export default function SignIn() {
+  const navigate = useNavigate()
+
   useEffect(() => {
     showSignIn()
   },[])
@@ -44,22 +47,48 @@ export default function SignIn() {
     }
   }
 
-  function handleLoginSubmit() {
+  async function handleLoginSubmit() {
     // get all the input values
     let stuNum = document.querySelector('#stuNum').value
     let pword = document.querySelector('#password').value
+    let errDiv = document.querySelector('.errorDiv')
 
+    let doNumbersmatch = false;
+    let doPwordsmatch = false;
+
+    // get the person document from the DB
+    let person = await getperson(stuNum)
+    console.log('person: ', person)
+    
     // check database for matching values
+    if (person){
+      if (person.number === stuNum) doNumbersmatch = true
+      if (person.pword === pword) doPwordsmatch = true
+    }
 
-    // check for type of user (student | admin)
-
-    // send the user to the correct page
+    // send person to correct page || tell them there is an error
+    if (doNumbersmatch && doPwordsmatch) {
+      navigate(`/${person.type}`)
+      errDiv.textContent = ''
+    } else {
+      errDiv.textContent = 'Student Number or Password is incorrect'
+    }
   }
-  function handleSignUpSubmit() {
+  async function getperson(num) {
+    let p = await fetch(`http://localhost:9000/api/v1/people?uvuId=${num}`)
+      .then(res => res.json())
+      .then(async (data) => {
+        return data[0]
+      })
+    return p
+  }
+  async function handleSignUpSubmit() {
     // get student number, password, and cpassword values
     let stuNum = document.querySelector('#stuNumNew').value
     let pword = document.querySelector('#passwordNew').value
     let cpword = document.querySelector('#cpassword').value
+    let errDiv = document.querySelector('.errorDiv')
+
 
     // validate student number
     let isNumValid = validateStudentNumber(stuNum)
@@ -74,6 +103,35 @@ export default function SignIn() {
     // add a person to the DB
     if (isNumValid && isPwordValid && isCpwordValid && doPasswordsMatch) {
       // add the person to the DB
+      let newPerson = {
+        // number, pword, type
+        number: stuNum,
+        pword: pword,
+        type: 'student'
+      }
+      await fetch(`http://localhost:9000/api/v1/people`, {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newPerson)
+      })
+      errDiv.innerHTML = ''
+      showSignIn()
+    } else {
+      errDiv.innerHTML = ''
+      if (!isNumValid) {
+        errDiv.innerHTML += 'Invalid Student Number<br>'
+      }
+      if (!isPwordValid) {
+        errDiv.innerHTML += 'Invalid Password<br>'
+      }
+      if (!isCpwordValid) {
+        errDiv.innerHTML += 'Invalid Confirmation Password<br>'
+      }
+      if (!doPasswordsMatch) {
+        errDiv.innerHTML += 'Passwords Must Match<br>'
+      }
     }
   }
 
@@ -99,11 +157,6 @@ export default function SignIn() {
     if (!pword.match(numbers)) return false
     if (!(pword.length >= 8)) return false
     return true
-  }
-  function validateExisitingPassword(pword) {
-    console.log('validateExisitingPassword()')
-
-    // check if the password is in the DB
   }
 
 
@@ -134,6 +187,7 @@ export default function SignIn() {
 
           </form>
         </div>
+          <div className='errorDiv'></div>
       </div>
     </>
   )
