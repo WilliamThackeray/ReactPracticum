@@ -14,9 +14,9 @@ Practicum ToDo's:
 
 Logs: 
   ✔ connect server and react together @done(23-11-27 17:24)
-  ☐ set up the server
+  ✔ set up the server
   ✔ make sure mongo connected @done(23-11-29 16:01)
-  ☐ test the CRUDL stuff with mongo
+  ✔ test the CRUDL stuff with mongo
   ✔ Populate the courses dropdown
 
 Replacement: 
