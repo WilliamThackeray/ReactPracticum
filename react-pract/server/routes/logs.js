@@ -36,7 +36,7 @@ router.get('/', async function(req, res) {
   }
 })
 
-app.post('/', async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     connection = await Mon.connect(url)
     let db = connection.db('uvu')

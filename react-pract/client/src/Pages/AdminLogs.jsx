@@ -81,8 +81,9 @@ function AdminLogs() {
       })
   }
 
-  function addLog() {
-    let logText = document.querySelector('#txtArea').value.trim()
+  async function addLog(event) {
+    event.preventDefault()
+    let logText = document.querySelector('#txtArea')
     if (logText.value.trim().length) {
       //if the string is not empty or just whitespace
       //get and format date
@@ -111,17 +112,21 @@ function AdminLogs() {
         ':' +
         sec
       const newLog = {
-        courseId: document.querySelector('#course').key,
+        courseId: courseId,
         uvuId: document.querySelector('#uvuId').value,
         date: time,
-        text: document.querySelector('#txtArea').value.trim(),
+        text: document.querySelector('#txtArea').value.trim()
       }
       console.log(newLog)
       document.querySelector('#txtArea').value = ''
-      fetch(`http://localhost:9000/api/v1/logs`, {
+      await fetch(`http://localhost:9000/api/v1/logs`, {
         method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(newLog)
       })
+      getLogs(uvuId)
     }
   }
 
@@ -133,12 +138,12 @@ function AdminLogs() {
         <div className="bg-white dark:bg-silver">
           <img src={logo} width="250" height="auto" alt='uvu logo' />
         </div>
-        <form method='POST' className="flex flex-col">
+        <form onSubmit={addLog} method='post' className="flex flex-col">
           <div id="topDiv" className="px-12 py-2 text-white bg-primary-500">
             <label for="course">Select Course</label><br />
             <select aria-label="Select Course" id="course" name="course" data-cy="course_select" className="rounded text-black px-2 py-1" onChange={dropdownUpdate}>
               <option value="Choose Courses">Choose Courses</option>
-              {courseDropdown.map(course => <option key={course.id} querydata={course.id}>{course.display}</option>)}
+              {courseDropdown.map(course => <option key={course.id}>{course.display}</option>)}
             </select><br />
 
             <div id="uvuIdDiv" className="py-2 hidden">
@@ -159,7 +164,7 @@ function AdminLogs() {
             <label className="text-xl py-2">New Log</label><br />
             <textarea id="txtArea" aria-label="add log textarea"
               data-cy="log_textarea" className="p-2 text-black"></textarea><br />
-            <button id="submitBtn" data-cy="add_log_btn" onClick={addLog}
+            <button id="submitBtn" type="submit" data-cy="add_log_btn" 
               className="rounded border-2 px-4 py-2 cursor-not-allowed bg-white transistion ease-in-out hover:bg-primary-700 hover:text-white duration-300" disabled>
               Add Log
             </button>
