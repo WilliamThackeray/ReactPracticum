@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import '../App.css'
+import { Link } from 'react-router-dom'
 
 function AdminLogs({uvuId}) {
   // Initialized default state
@@ -129,11 +130,14 @@ function AdminLogs({uvuId}) {
       <div className="">
         <form onSubmit={addLog} method='post'>
           <div id="topDiv">
-            <label for="course">Select Course</label><br />
-            <select aria-label="Select Course" id="course" name="course" data-cy="course_select" onChange={dropdownUpdate}>
-              <option value="Choose Courses">Choose Courses</option>
-              {courseDropdown.map(course => <option key={course.id}>{course.display}</option>)}
-            </select><br />
+          <Link to='/admin/addCourse' state={uvuId}><button>Add Course For Students</button></Link>
+            <div>
+              <label for="course">Select Course</label><br />
+              <select aria-label="Select Course" id="course" name="course" data-cy="course_select" onChange={dropdownUpdate}>
+                <option value="Choose Courses">Choose Courses</option>
+                {courseDropdown.map(course => <option key={course.id}>{course.display}</option>)}
+              </select><br />
+            </div>
 
             <div id="uvuIdDiv" className="py-2 hidden">
               <label for="uvuId">UVU ID</label><br />
