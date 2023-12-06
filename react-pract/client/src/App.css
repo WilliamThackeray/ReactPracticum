@@ -55,7 +55,7 @@ form {
   padding: 2rem;
   border-radius: 8px;
 }
-label {
+.signInDiv label, .signUpDiv label {
   padding-top: 1rem;
   font-size: 1.2rem;
   font-weight: 600;
@@ -108,4 +108,40 @@ input {
 #logo {
   display: flex;
   justify-content: center;
+}
+
+/* Student/Admin Logs */
+
+#topDiv {
+  width: 100%;
+}
+#topDiv div {
+  padding: 1rem;
+}
+#topDiv button, #botDiv button {
+  width: 50%;
+  align-self: center;
+  padding: 0.3rem 0.5rem;
+  border: solid 1px var(--black);
+  border-radius: 5px;
+
+  cursor: pointer;
+}
+textarea {
+  width: 90%;
+  align-self: center;
+  padding: .5rem;
+  border: solid 1px var(--black);
+  border-radius: 5px;
+}
+label[for="course"] {
+  margin-top: 1rem;
+}
+
+#botDiv li {
+  cursor: pointer;
+}
+
+.min p {
+  display: none;
 }
