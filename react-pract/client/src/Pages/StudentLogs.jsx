@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from "react-router-dom";
 import '../App.css'
+import Log from '../Components/Log';
 
 function StudentLogs({uvuId}) {
   // Initialized default state
@@ -114,10 +115,9 @@ function StudentLogs({uvuId}) {
 
   return (
     <div className="App">
-      <div className="">
         <form onSubmit={addLog} method='post'>
           <div id="topDiv">
-            <Link to='/student/addToCourse' state={uvuId}><button>Add Course</button></Link>
+            <Link style={{margin: '1rem'}} to='/student/addToCourse' state={uvuId}><button>Add Course</button></Link>
             <div>
               <label for="course">Select Course</label><br />
               <select aria-label="Select Course" id="course" name="course" data-cy="course_select" onChange={dropdownUpdate}>
@@ -136,7 +136,7 @@ function StudentLogs({uvuId}) {
             </h3>
             <div id='noLogs'></div>
             <ul data-cy="logs" id="logs"></ul>
-              {studentLogs.map(log => <li>{log.text}</li>)}
+              {studentLogs.map(log => <Log props={log}></Log>)}
             <br />
             <label>New Log</label><br />
             <textarea id="txtArea" onChange={handleTextBoxChange} aria-label="add log textarea"
@@ -146,7 +146,6 @@ function StudentLogs({uvuId}) {
             </button>
           </div>
         </form>
-      </div>
     </div>
   )
 }
