@@ -1,4 +1,3 @@
-import logo from '../UVUMonogramGreen-0005.png'
 import React, { useState, useEffect } from 'react'
 import '../App.css'
 
@@ -130,9 +129,6 @@ function AdminLogs() {
   return (
     <div className="App">
       <div className="">
-        <div>
-          <img src={logo} width="250" height="auto" alt='uvu logo' />
-        </div>
         <form onSubmit={addLog} method='post'>
           <div id="topDiv">
             <label for="course">Select Course</label><br />

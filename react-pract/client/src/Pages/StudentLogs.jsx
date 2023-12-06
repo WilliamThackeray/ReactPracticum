@@ -1,5 +1,5 @@
-import logo from '../UVUMonogramGreen-0005.png'
 import React, { useState, useEffect } from 'react'
+import { Outlet } from "react-router-dom";
 import '../App.css'
 
 function AdminLogs() {
@@ -106,24 +106,11 @@ function AdminLogs() {
     }
   }
 
-  async function addStudentToCourse(course) {
-    await fetch(`http://localhost:9000/api/v1/courses`, {
-      method: 'PUT',
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({studentId: '10333333', courseId: course})//TODO change to uvuId
-    })
-  }
-
 
 
   return (
     <div className="App">
       <div className="">
-        <div>
-          <img src={logo} width="250" height="auto" alt='uvu logo' />
-        </div>
         <form onSubmit={addLog} method='post'>
           <div id="topDiv">
             <label for="course">Select Course</label><br />

@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import StudentLogs from "./Pages/StudentLogs.jsx";
 import AdminLogs from "./Pages/AdminLogs.jsx";
+import AddStudentToCourse from "./Pages/AddStudentToCourse.jsx"
 import Layout from "./Pages/Layout.jsx";
 import SignIn from "./Pages/SignIn.jsx";
 
@@ -10,7 +11,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />} >
           <Route index element={<SignIn />}/>
-          <Route path="student" element={<StudentLogs />}/>
+          <Route path="student" element={<StudentLogs />} />
+          <Route path="student/addToCourse" element={<AddStudentToCourse />}/>
           <Route path="admin" element={<AdminLogs />}/>
           {/* <Route path="teams" element={<TeamsPage/>} />
           <Route path="add-team" element={<AddEditTeam/>}/>

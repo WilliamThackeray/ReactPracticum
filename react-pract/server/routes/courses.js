@@ -60,7 +60,7 @@ router.put('/', async function(req, res) { //get all courses
       $push: { 
       students: addStudent 
     }}) //adds student id to course only if it's not already in there
-    res.status(201)
+    res.status(204)
     res.send()
   } catch(err) {
     throw err

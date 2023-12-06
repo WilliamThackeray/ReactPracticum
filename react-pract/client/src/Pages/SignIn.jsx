@@ -1,4 +1,3 @@
-import logo from '../UVUMonogramGreen-0005.png'
 import React, { useState, useEffect } from 'react'
 import '../App.css'
 
@@ -111,7 +110,6 @@ export default function SignIn() {
   return (
     <>
       <div class='signInBody'>
-        <img src={logo} width="250" height="auto" alt='uvu logo' />
         <div className='buttons'>
           <button className='showSignInBtn' onClick={showSignIn}>Sign In</button>
           <button className='showSignUpBtn' onClick={showSignUp}>Sign Up</button>
