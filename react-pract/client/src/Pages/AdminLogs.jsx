@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import '../App.css'
 import { Link } from 'react-router-dom'
+import Log from '../Components/Log'
 
 function AdminLogs({uvuId}) {
   // Initialized default state
@@ -152,7 +153,7 @@ function AdminLogs({uvuId}) {
             </h3>
             <div id='noLogs'></div>
             <ul data-cy="logs" id="logs"></ul>
-              {studentLogs.map(log => <li>{log.text}</li>)}
+              {studentLogs.map(log => <Log props={log}></Log>)}
             <br />
             <label>New Log</label><br />
             <textarea id="txtArea" aria-label="add log textarea"

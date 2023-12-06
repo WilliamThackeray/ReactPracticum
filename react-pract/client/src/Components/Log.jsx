@@ -1,8 +1,8 @@
 
 
 export default function Log({props}) {
-  const date = props.log.date
-  const text = props.log.text
+  const date = props.date
+  const text = props.text
 
   function minMax() {
     console.log('minMax()')

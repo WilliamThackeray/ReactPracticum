@@ -145,3 +145,7 @@ label[for="course"] {
 .min p {
   display: none;
 }
+
+#addCourse {
+  width: 30%;
+}
