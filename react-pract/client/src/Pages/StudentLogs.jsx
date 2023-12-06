@@ -7,7 +7,7 @@ function StudentLogs({uvuId}) {
   const [courseDropdown, setCourseDropdown] = useState([])
   const [courseId, setCourseId] =useState('')
   const [studentLogs, setStudentLogs] = useState([])
-  navigate = useNavigate()
+  const navigate = useNavigate()
 
   // useEffect() is called when the component loads onto the page. This is where we will do default setup type stuff
   useEffect(() => {

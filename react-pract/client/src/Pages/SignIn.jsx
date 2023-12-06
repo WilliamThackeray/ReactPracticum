@@ -11,6 +11,8 @@ export default function SignIn({handleUvuId}) {
 
   function showSignIn() {
     console.log('showSignIn()')
+    let errDiv = document.querySelector('.errorDiv')
+    errDiv.innerHTML = ''
 
     let signInBtn = document.querySelector('.showSignInBtn')
     let signUpBtn = document.querySelector('.showSignUpBtn')
@@ -25,6 +27,8 @@ export default function SignIn({handleUvuId}) {
   }
   function showSignUp() {
     console.log('showSignUp()')
+    let errDiv = document.querySelector('.errorDiv')
+    errDiv.innerHTML = ''
 
     let signInBtn = document.querySelector('.showSignInBtn')
     let signUpBtn = document.querySelector('.showSignUpBtn')
@@ -57,8 +61,11 @@ export default function SignIn({handleUvuId}) {
     let doPwordsmatch = false;
 
     // get the person document from the DB
-    let person = await getperson(stuNum)
-    console.log('person: ', person)
+    let person;
+    if (stuNum && pword) {
+      person = await getperson(stuNum)
+      console.log('person: ', person)
+    }
     
     // check database for matching values
     if (person){

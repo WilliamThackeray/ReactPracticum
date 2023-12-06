@@ -22,6 +22,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100%;
+
 }
 .buttons {
   display: flex;
@@ -30,6 +32,9 @@
 .buttons button {
   padding: 0.6rem 1rem;
   margin: 1rem;
+  border: solid 1px var(--black);
+  border-radius: 5px;
+  cursor: pointer;
 }
 .active {
   background-color: #275d38;
@@ -42,9 +47,34 @@
 .signInDiv h1 {
   text-align: center;
 }
-.signInDiv form {
+form {
   display: flex;
   flex-direction: column;
+  height: 100%;
+  background-color: var(--uvu-green-l2);
+  padding: 2rem;
+  border-radius: 8px;
+}
+label {
+  padding-top: 1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+input {
+  width: 100%;
+  font-size: 1.1rem;
+  border-radius: 3px;
+  border: solid 1px var(--black)
+}
+.signInDiv button, .signUpDiv button {
+  width: 50%;
+  align-self: center;
+  padding: 0.3rem 0.5rem;
+  margin: 1rem;
+  border: solid 1px var(--black);
+  border-radius: 5px;
+
+  cursor: pointer;
 }
 
 .signUpDiv {
@@ -71,6 +101,8 @@
 }
 .errorDiv {
   color: var(--red);
+  font-weight: 500;
+  padding: 1rem 0 5rem 0;
 }
 
 #logo {
