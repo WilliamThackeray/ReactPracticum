@@ -1,8 +1,11 @@
 import logo from '../UVUMonogramGreen-0005.png'
 import React, { useState, useEffect } from 'react'
 import '../App.css'
+import { useNavigate } from 'react-router-dom'
 
 export default function SignIn() {
+  const navigate = useNavigate()
+
   useEffect(() => {
     showSignIn()
   },[])
@@ -45,16 +48,36 @@ export default function SignIn() {
     }
   }
 
-  function handleLoginSubmit() {
+  async function handleLoginSubmit() {
     // get all the input values
     let stuNum = document.querySelector('#stuNum').value
     let pword = document.querySelector('#password').value
 
+    let doNumbersmatch = false;
+    let doPwordsmatch = false;
+
+    // get the person document from the DB
+    let person = await getperson(stuNum)
+    console.log('person: ', person)
+    
     // check database for matching values
+    if (person.number === stuNum) doNumbersmatch = true
+    if (person.pword === pword) doPwordsmatch = true
 
-    // check for type of user (student | admin)
-
-    // send the user to the correct page
+    // send person to correct page || tell them there is an error
+    if (doNumbersmatch && doPwordsmatch) {
+      navigate(`/${person.type}`)
+    } else {
+      
+    }
+  }
+  async function getperson(num) {
+    let p = await fetch(`http://localhost:9000/api/v1/people?uvuId=${num}`)
+      .then(res => res.json())
+      .then(async (data) => {
+        return data[0]
+      })
+    return p
   }
   function handleSignUpSubmit() {
     // get student number, password, and cpassword values
