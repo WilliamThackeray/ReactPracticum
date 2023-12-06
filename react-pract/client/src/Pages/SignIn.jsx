@@ -52,6 +52,7 @@ export default function SignIn() {
     // get all the input values
     let stuNum = document.querySelector('#stuNum').value
     let pword = document.querySelector('#password').value
+    let errDiv = document.querySelector('.errorDiv')
 
     let doNumbersmatch = false;
     let doPwordsmatch = false;
@@ -61,14 +62,17 @@ export default function SignIn() {
     console.log('person: ', person)
     
     // check database for matching values
-    if (person.number === stuNum) doNumbersmatch = true
-    if (person.pword === pword) doPwordsmatch = true
+    if (person){
+      if (person.number === stuNum) doNumbersmatch = true
+      if (person.pword === pword) doPwordsmatch = true
+    }
 
     // send person to correct page || tell them there is an error
     if (doNumbersmatch && doPwordsmatch) {
       navigate(`/${person.type}`)
+      errDiv.textContent = ''
     } else {
-      
+      errDiv.textContent = 'Student Number or Password is incorrect'
     }
   }
   async function getperson(num) {
@@ -124,11 +128,6 @@ export default function SignIn() {
     if (!(pword.length >= 8)) return false
     return true
   }
-  function validateExisitingPassword(pword) {
-    console.log('validateExisitingPassword()')
-
-    // check if the password is in the DB
-  }
 
 
   return (
@@ -159,6 +158,7 @@ export default function SignIn() {
 
           </form>
         </div>
+          <div className='errorDiv'></div>
       </div>
     </>
   )
