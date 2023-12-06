@@ -54,6 +54,7 @@ form {
   background-color: var(--uvu-green-l2);
   padding: 2rem;
   border-radius: 8px;
+  min-width: 40%;
 }
 .signInDiv label, .signUpDiv label {
   padding-top: 1rem;
