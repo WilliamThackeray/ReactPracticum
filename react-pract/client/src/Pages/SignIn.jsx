@@ -83,11 +83,13 @@ export default function SignIn() {
       })
     return p
   }
-  function handleSignUpSubmit() {
+  async function handleSignUpSubmit() {
     // get student number, password, and cpassword values
     let stuNum = document.querySelector('#stuNumNew').value
     let pword = document.querySelector('#passwordNew').value
     let cpword = document.querySelector('#cpassword').value
+    let errDiv = document.querySelector('.errorDiv')
+
 
     // validate student number
     let isNumValid = validateStudentNumber(stuNum)
@@ -102,6 +104,35 @@ export default function SignIn() {
     // add a person to the DB
     if (isNumValid && isPwordValid && isCpwordValid && doPasswordsMatch) {
       // add the person to the DB
+      let newPerson = {
+        // number, pword, type
+        number: stuNum,
+        pword: pword,
+        type: 'student'
+      }
+      await fetch(`http://localhost:9000/api/v1/people`, {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newPerson)
+      })
+      errDiv.innerHTML = ''
+      showSignIn()
+    } else {
+      errDiv.innerHTML = ''
+      if (!isNumValid) {
+        errDiv.innerHTML += 'Invalid Student Number<br>'
+      }
+      if (!isPwordValid) {
+        errDiv.innerHTML += 'Invalid Password<br>'
+      }
+      if (!isCpwordValid) {
+        errDiv.innerHTML += 'Invalid Confirmation Password<br>'
+      }
+      if (!doPasswordsMatch) {
+        errDiv.innerHTML += 'Passwords Must Match<br>'
+      }
     }
   }
 

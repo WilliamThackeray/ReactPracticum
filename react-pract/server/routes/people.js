@@ -33,4 +33,17 @@ router.get('/', async function(req, res) { // get person with stuid
   }
 })
 
+router.post('/', async (req, res) => {
+  try {
+    connection = await Mon.connect(url)
+    let db = connection.db('uvu')
+    let newPerson = req.body
+    await db.collection('people').insertOne(newPerson)
+    res.status(201)
+    res.send(newPerson)
+  } catch(err) {
+    throw err
+  }
+})
+
 module.exports = router
