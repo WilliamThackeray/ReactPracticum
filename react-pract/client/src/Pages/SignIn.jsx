@@ -50,10 +50,6 @@ export default function SignIn() {
     let stuNum = document.querySelector('#stuNum').value
     let pword = document.querySelector('#password').value
 
-    // check all input values to make sure they are valid
-    let isNumValid = validateStudentNumber(stuNum)
-    console.log('isNumValid? ', isNumValid)
-    
     // check database for matching values
 
     // check for type of user (student | admin)
