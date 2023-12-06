@@ -17,14 +17,14 @@ function AddCourse() {
   }
   
   function validateCourse(course) {
-    let courseArr = course.split[' ']
+    let courseArr = course.split(' ')
     if (courseArr.length !== 2) {
       return false
     }
-    else if (!/[A-z][A-z]/.test(courseArr[0])) {
+    if (!/[A-z][A-z]/.test(courseArr[0])) {
       return false
     }
-    else if (!/\d\d\d\d/.test(courseArr[1])) {
+    if (!/\d\d\d\d/.test(courseArr[1])) {
       return false
     }
     return true
@@ -32,13 +32,14 @@ function AddCourse() {
 
   async function onAddCourse() {
     let courseInput = document.querySelector('#addCourse')
-    if (!validateCourse) {
-      document.querySelector('#errorsDiv').innerText = 'Expected a value like "CS 1234"'
+    document.querySelector('.errorDiv').innerText = ''
+    if (!validateCourse(courseInput.value)) {
+      document.querySelector('.errorDiv').innerText = 'Expected a value like "CS 1234"'
       return
     }
     const newCourse = {
       id: convertToId(courseInput.value),
-      display: courseInput.value,
+      display: courseInput.value.toUpperCase(),
       students: []
     }
     courseInput.value = ''
@@ -56,7 +57,7 @@ function AddCourse() {
     <div className="App">
       <label for="addCourse">Enter Course</label><br />
       <input type="text" maxLength="7" placeholder="CS 1234" id="addCourse" name="addCourse" data-cy="uvuId_input" />
-      <div id="errorsDiv"></div><br />
+      <div className="errorDiv"></div><br />
       <div className='buttons'>
         <button className='cancel' onClick={onCancel}>Cancel</button>
         <button className='addCourseBtn' onClick={onAddCourse}>Add Course</button>
